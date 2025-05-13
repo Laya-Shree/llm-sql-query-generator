@@ -3,9 +3,11 @@
 An AI-driven application that enables users to query a T-shirt inventory database using natural language. It leverages large language models to convert user queries into SQL statements and returns meaningful results via a user-friendly web interface.
 
 
+
 ## 🧾 Overview
 
 This project uses **LangChain**, **Google Gemini Pro**, and **Streamlit** to interpret and answer questions related to T-shirt inventory stored in a MySQL database. It demonstrates the integration of modern LLM capabilities with traditional databases to make data querying accessible to non-technical users.
+
 
 
 ## ⚙️ Features
@@ -17,6 +19,7 @@ This project uses **LangChain**, **Google Gemini Pro**, and **Streamlit** to int
 * 💻 Clean and interactive web UI with Streamlit
 
 
+
 ## 📁 File Structure
 
 | File                  | Description                                                 |
@@ -26,10 +29,12 @@ This project uses **LangChain**, **Google Gemini Pro**, and **Streamlit** to int
 | `few_shots.py`        | Stores curated few-shot examples for better prompt context  |
 
 
+
 ## 🗃️ Database Schema
 
 * `t_shirts`: t_shirt_id, brand, size, color, price, stock
 * `discounts`: (discount details linked to T-shirt IDs) discountID, t_shirt_id, pct_discount
+
 
 
 ## 🧠 Tech Stack
@@ -42,6 +47,7 @@ This project uses **LangChain**, **Google Gemini Pro**, and **Streamlit** to int
 * **HuggingFace Sentence Transformers** – Embedding model for similarity search
 
 
+
 ## 🧬 Query Processing Pipeline
 
 1. Accepts user query in plain English
@@ -50,6 +56,7 @@ This project uses **LangChain**, **Google Gemini Pro**, and **Streamlit** to int
 4. Generates SQL using Gemini Flash 2.0 via LangChain
 5. Executes the query on the MySQL database
 6. Displays results in a clean, tabular format
+
 
 
 ## 🛠 Setup Instructions
@@ -90,6 +97,7 @@ pip install streamlit langchain langchain-google-genai langchain-community pymys
 ```bash
 streamlit run app.py
 ```
+
 
 ## 💡 Example Queries
 
