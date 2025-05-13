@@ -30,6 +30,35 @@ This project uses **LangChain**, **Google Gemini Pro**, and **Streamlit** to int
 
 ---
 
+## 🗃️ Database Schema
+
+* `t_shirts`: t_shirt_id, brand, size, color, price, stock
+* `discounts`: (discount details linked to T-shirt IDs) discountID, t_shirt_id, pct_discount
+
+---
+
+## 🧠 Tech Stack
+
+* **Streamlit** – Frontend UI
+* **LangChain** – Orchestration of language and tool components
+* **Google gemini-2.0-flash** – Natural language understanding and SQL generation
+* **MySQL** – Backend database
+* **ChromaDB** – Vector database for semantic retrieval
+* **HuggingFace Sentence Transformers** – Embedding model for similarity search
+
+---
+
+## 🧬 Query Processing Pipeline
+
+1. Accepts user query in plain English
+2. Retrieves similar examples using vector similarity
+3. Constructs a few-shot prompt with selected examples
+4. Generates SQL using Gemini Flash 2.0 via LangChain
+5. Executes the query on the MySQL database
+6. Displays results in a clean, tabular format
+
+---
+
 ## 🛠 Setup Instructions
 
 ### Prerequisites
@@ -79,30 +108,5 @@ streamlit run app.py
 
 ---
 
-## 🧠 Tech Stack
 
-* **Streamlit** – Frontend UI
-* **LangChain** – Orchestration of language and tool components
-* **Google gemini-2.0-flash** – Natural language understanding and SQL generation
-* **MySQL** – Backend database
-* **ChromaDB** – Vector database for semantic retrieval
-* **HuggingFace Sentence Transformers** – Embedding model for similarity search
-
----
-
-## 🧬 Query Processing Pipeline
-
-1. Accepts user query in plain English
-2. Retrieves similar examples using vector similarity
-3. Constructs a few-shot prompt with selected examples
-4. Generates SQL using Gemini Flash 2.0 via LangChain
-5. Executes the query on the MySQL database
-6. Displays results in a clean, tabular format
-
----
-
-## 🗃️ Database Schema
-
-* `t_shirts`: t_shirt_id, brand, size, color, price, stock
-* `discounts`: (discount details linked to T-shirt IDs) discountID, t_shirt_id, pct_discount 
 
