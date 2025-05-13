@@ -2,13 +2,11 @@
 
 An AI-driven application that enables users to query a T-shirt inventory database using natural language. It leverages large language models to convert user queries into SQL statements and returns meaningful results via a user-friendly web interface.
 
----
 
 ## 🧾 Overview
 
 This project uses **LangChain**, **Google Gemini Pro**, and **Streamlit** to interpret and answer questions related to T-shirt inventory stored in a MySQL database. It demonstrates the integration of modern LLM capabilities with traditional databases to make data querying accessible to non-technical users.
 
----
 
 ## ⚙️ Features
 
@@ -18,7 +16,6 @@ This project uses **LangChain**, **Google Gemini Pro**, and **Streamlit** to int
 * 💡 Example-guided prompting for improved query accuracy
 * 💻 Clean and interactive web UI with Streamlit
 
----
 
 ## 📁 File Structure
 
@@ -28,14 +25,12 @@ This project uses **LangChain**, **Google Gemini Pro**, and **Streamlit** to int
 | `langchain_helper.py` | Handles DB connection, embeddings, and SQL generation logic |
 | `few_shots.py`        | Stores curated few-shot examples for better prompt context  |
 
----
 
 ## 🗃️ Database Schema
 
 * `t_shirts`: t_shirt_id, brand, size, color, price, stock
 * `discounts`: (discount details linked to T-shirt IDs) discountID, t_shirt_id, pct_discount
 
----
 
 ## 🧠 Tech Stack
 
@@ -46,7 +41,6 @@ This project uses **LangChain**, **Google Gemini Pro**, and **Streamlit** to int
 * **ChromaDB** – Vector database for semantic retrieval
 * **HuggingFace Sentence Transformers** – Embedding model for similarity search
 
----
 
 ## 🧬 Query Processing Pipeline
 
@@ -57,7 +51,6 @@ This project uses **LangChain**, **Google Gemini Pro**, and **Streamlit** to int
 5. Executes the query on the MySQL database
 6. Displays results in a clean, tabular format
 
----
 
 ## 🛠 Setup Instructions
 
@@ -98,15 +91,13 @@ pip install streamlit langchain langchain-google-genai langchain-community pymys
 streamlit run app.py
 ```
 
----
-
 ## 💡 Example Queries
 
 * "How many white Nike T-shirts in XS are available?"
 * "What is the highest discount (in dollars) on any T-shirt?"
 * "How much revenue will we generate if all Levi’s T-shirts are sold with their current discounts?"
 
----
+
 
 
 
