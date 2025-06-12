@@ -1,17 +1,16 @@
 from langchain.chains.sql_database.prompt import PROMPT_SUFFIX, _mysql_prompt
 from langchain_community.tools.sql_database.tool import QuerySQLDatabaseTool
-from langchain_community.utilities import SQLDatabase
 from langchain.prompts import SemanticSimilarityExampleSelector
 from langchain.prompts.prompt import PromptTemplate
 from langchain.prompts import FewShotPromptTemplate
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain_google_genai import GoogleGenerativeAI 
 from langchain.chains import create_sql_query_chain
-from langchain.utilities import SQLDatabase
 from langchain.vectorstores import Chroma
 from few_shots import few_shots
 from dotenv import load_dotenv
 import os
+from db_connection import get_langchain_db
 
 # Create a custom tool that extends QuerySQLDatabaseTool to clean queries
 class CleanQuerySQLDatabaseTool(QuerySQLDatabaseTool):
@@ -28,14 +27,9 @@ class CleanQuerySQLDatabaseTool(QuerySQLDatabaseTool):
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
-user = os.getenv("DB_USER")
-pswd = os.getenv("DB_PASSWORD")
-host = os.getenv("DB_HOST")
-name = os.getenv("DB_NAME")
 
 def get_few_shot_db_chain():
-
-    db = SQLDatabase.from_uri(f"mysql+pymysql://{user}:{pswd}@{host}/{name}", sample_rows_in_table_info = 3)
+    db = get_langchain_db()
     llm = GoogleGenerativeAI(google_api_key=api_key, model = "gemini-2.0-flash", temperature=0.2)
     embeddings = HuggingFaceEmbeddings(model_name = 'sentence-transformers/all-MiniLM-L6-v2')
 
