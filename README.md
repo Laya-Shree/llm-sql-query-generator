@@ -25,8 +25,9 @@ This project uses **LangChain**, **Google Gemini Pro**, and **Streamlit** to int
 | File                  | Description                                                 |
 | --------------------- | ----------------------------------------------------------- |
 | `app.py`              | Streamlit app for the front end                             |
-| `langchain_helper.py` | Handles DB connection, embeddings, and SQL generation logic |
+| `langchain_helper.py` | Handles embeddings and SQL generation logic                 |
 | `few_shots.py`        | Stores curated few-shot examples for better prompt context  |
+| `db_connection.py`    | Centralized database connection management module           |
 
 
 
@@ -103,7 +104,7 @@ streamlit run app.py
 
 * "How many white Nike T-shirts in XS are available?"
 * "What is the highest discount (in dollars) on any T-shirt?"
-* "How much revenue will we generate if all Levi’s T-shirts are sold with their current discounts?"
+* "How much revenue will we generate if all Levi's T-shirts are sold with their current discounts?"
 
 
 
