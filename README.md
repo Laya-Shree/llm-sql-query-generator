@@ -1,4 +1,4 @@
-# T-Shirts Database Q\&A (AI-Powered SQL Generator)
+# RAG-Based Q&A System on T-Shirt Database
 
 An AI-driven application that enables users to query a T-shirt inventory database using natural language. It leverages large language models to convert user queries into SQL statements and returns meaningful results via a user-friendly web interface.
 
