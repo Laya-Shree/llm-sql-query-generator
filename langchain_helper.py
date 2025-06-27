@@ -3,14 +3,19 @@ from langchain_community.tools.sql_database.tool import QuerySQLDatabaseTool
 from langchain.prompts import SemanticSimilarityExampleSelector
 from langchain.prompts.prompt import PromptTemplate
 from langchain.prompts import FewShotPromptTemplate
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_google_genai import GoogleGenerativeAI 
 from langchain.chains import create_sql_query_chain
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 from few_shots import few_shots
 from dotenv import load_dotenv
-import os
 from db_connection import get_langchain_db
+import os
+import torch
+import streamlit as st
+
+# Add this line to fix the compatibility issue
+torch.classes.__path__ = []
 
 # Create a custom tool that extends QuerySQLDatabaseTool to clean queries
 class CleanQuerySQLDatabaseTool(QuerySQLDatabaseTool):
