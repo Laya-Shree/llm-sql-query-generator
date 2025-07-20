@@ -28,7 +28,7 @@ try:
         
         with col1:
             st.markdown("### Current T-Shirt Inventory")
-            st.dataframe(results_df)
+            st.dataframe(results_df, hide_index=True, use_container_width=True)
         
         with col2:
             st.markdown("### 💡 Example Questions")
