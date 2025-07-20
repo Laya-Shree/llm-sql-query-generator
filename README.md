@@ -2,6 +2,8 @@
 
 An AI-driven application that enables users to query a T-shirt inventory database using natural language. It leverages large language models to convert user queries into SQL statements and returns meaningful results via a user-friendly web interface.
 
+<img width="1526" height="857" alt="image" src="https://github.com/user-attachments/assets/0886927c-70ce-4b52-8a01-2fae7ea1235f" />
+<img width="1434" height="861" alt="image" src="https://github.com/user-attachments/assets/214acdec-7867-451a-9623-9345c36d8e6b" />
 
 
 ## 🧾 Overview
