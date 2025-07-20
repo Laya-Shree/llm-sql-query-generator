@@ -1,5 +1,5 @@
 import streamlit as st
-from langchain_helper import get_few_shot_db_chain
+from langchain_helper import get_few_shot_db_chain,get_last_sql_query
 from db_connection import get_pymysql_connection
 import pandas as pd
 
@@ -28,7 +28,7 @@ try:
         
         with col1:
             st.markdown("### Current T-Shirt Inventory")
-            st.dataframe(results_df, hide_index=True)
+            st.dataframe(results_df)
         
         with col2:
             st.markdown("### 💡 Example Questions")
@@ -50,11 +50,23 @@ finally:
         connection.close()
 
 st.header("Ask Questions About T-Shirts")
-question = st.text_input("Question: ")
-
-if question: 
-    chain = get_few_shot_db_chain()
-    response = chain.invoke({"question":question})
-
-    st.header("Answer")
-    st.write(response)
+question = st.text_input(" ")
+if question:
+    try:
+        chain = get_few_shot_db_chain()
+        
+        # Execute the chain (this will also store the SQL query globally)
+        response = chain.invoke({"question": question})
+        
+        # Get the SQL query that was just executed
+        sql_query = get_last_sql_query()
+        
+        # Display both components
+        st.header("Generated SQL Query")
+        st.write(sql_query)
+        
+        st.header("Answer")
+        st.code(response)
+        
+    except Exception as e:
+        st.error(f"Error processing question: {e}")
