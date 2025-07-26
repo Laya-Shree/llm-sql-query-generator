@@ -10,7 +10,8 @@ def get_db_credentials():
         'user': os.getenv("DB_USER"),
         'password': os.getenv("DB_PASSWORD"),
         'host': os.getenv("DB_HOST"),
-        'database': os.getenv("DB_NAME")
+        'database': os.getenv("DB_NAME"),
+        'port': int(os.getenv("DB_PORT"))
     }
 
 def get_pymysql_connection():
@@ -20,11 +21,12 @@ def get_pymysql_connection():
         host=credentials['host'],
         user=credentials['user'],
         password=credentials['password'],
-        database=credentials['database']
+        database=credentials['database'],
+        port=credentials['port']
     )
 
 def get_langchain_db():
     """Create and return a LangChain SQLDatabase instance."""
     credentials = get_db_credentials()
-    connection_string = f"mysql+pymysql://{credentials['user']}:{credentials['password']}@{credentials['host']}/{credentials['database']}"
+    connection_string = f"mysql+pymysql://{credentials['user']}:{credentials['password']}@{credentials['host']}:{credentials['port']}/{credentials['database']}"
     return SQLDatabase.from_uri(connection_string, sample_rows_in_table_info=3) 
