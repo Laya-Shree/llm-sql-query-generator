@@ -13,3 +13,4 @@ chromadb
 langchain-community
 tabulate
 langchain_google_genai
+sqlite3
