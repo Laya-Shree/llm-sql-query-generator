@@ -9,7 +9,7 @@ langchain-experimental
 mysql-connector-python
 pymysql
 sentence-transformers
-chromadb
+chromadb==0.4.13
 langchain-community
 tabulate
 langchain_google_genai
