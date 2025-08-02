@@ -15,36 +15,66 @@ try:
     # Connect to database using the new module
     connection = get_pymysql_connection()
     
-    with connection.cursor() as cursor:
-        # Execute query to get all t-shirts
-        cursor.execute("SELECT * FROM t_shirts")
-        results = cursor.fetchall()
+    # Display layout with tabs for tables and common example questions
+    col1, col2 = st.columns([1, 1])
+    
+    with col1:
+        # Create tabs for toggling between tables
+        tab1, tab2 = st.tabs(["T-Shirts Inventory", "Discounts"])
         
-        # Get column names
-        columns = [desc[0] for desc in cursor.description]
+        with tab1:
+            with connection.cursor() as cursor:
+                # Execute query to get all t-shirts
+                cursor.execute("SELECT * FROM t_shirts")
+                tshirt_results = cursor.fetchall()
+                
+                # Get column names for t-shirts
+                tshirt_columns = [desc[0] for desc in cursor.description]
+                
+                # Convert results to DataFrame with proper columns
+                tshirt_df = pd.DataFrame(tshirt_results, columns=tshirt_columns)
+                
+                st.markdown("### Current T-Shirt Inventory")
+                st.dataframe(tshirt_df, hide_index=True, use_container_width=True)
         
-        # Convert results to DataFrame with proper columns
-        results_df = pd.DataFrame(results, columns=columns)
-        
-        # Display inventory and example questions side by side
-        col1, col2 = st.columns([1, 1])
-        
-        with col1:
-            st.markdown("### Current T-Shirt Inventory")
-            st.dataframe(results_df, hide_index=True, use_container_width=True)
-        
-        with col2:
-            st.markdown("### 💡 Example Questions")
-            st.markdown(
-                """
-                - What is the total number of t-shirts in stock?
-                - How many t-shirts do we have left for nike in extra small size and white color?
-                - How much is the price of the inventory for all small size t-shirts?
-                - How many t-shirts are priced above $20?
-                - How many white color Levi's t shirts we have available?
-                - If we have to sell all the Levi’s T-shirts today. How much revenue our store will generate without discount?
-                """
-            )
+        with tab2:
+            with connection.cursor() as cursor:
+                # Execute query to get all discounts
+                cursor.execute("SELECT * FROM discounts")
+                discount_results = cursor.fetchall()
+                
+                # Get column names for discounts
+                discount_columns = [desc[0] for desc in cursor.description]
+                
+                # Convert results to DataFrame with proper columns
+                discount_df = pd.DataFrame(discount_results, columns=discount_columns)
+                
+                st.markdown("### Current Discounts")
+                st.dataframe(discount_df, hide_index=True, use_container_width=True)
+    
+    with col2:
+        st.markdown("### 💡 Example Questions")
+        st.markdown(
+            """
+            **T-Shirt Questions:**
+            - What is the total number of t-shirts in stock?
+            - How many t-shirts do we have left for nike in extra small size and white color?
+            - How much is the price of the inventory for all small size t-shirts?
+            - How many t-shirts are priced above $20?
+            - How many white color Levi's t shirts we have available?
+            - If we have to sell all the Levi's T-shirts today. How much revenue our store will generate without discount?
+            
+            **Discount Questions:**
+            - What discounts are currently active?
+            - Which t-shirt brands have discounts available?
+            - What is the highest discount percentage available?
+            - Are there any discounts for Adidas t-shirts?
+            
+            **Combined Questions:**
+            - What would be the final price of Nike t-shirts after applying available discounts?
+            - How much total revenue can we generate if we sell all inventory with current discounts?
+            """
+        )
         
 except Exception as e:
     st.error(f"Error connecting to database: {e}")
