@@ -1,3 +1,6 @@
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
 from langchain_helper import get_few_shot_db_chain,get_last_sql_query
 from db_connection import get_pymysql_connection

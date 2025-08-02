@@ -1,3 +1,7 @@
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 from langchain.chains import create_sql_query_chain
 from langchain_community.utilities import SQLDatabase
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -6,7 +10,6 @@ from langchain_community.vectorstores import Chroma
 from langchain.prompts import PromptTemplate, FewShotPromptTemplate
 from langchain.prompts.example_selector import SemanticSimilarityExampleSelector
 from langchain_core.tools import Tool
-
 from few_shots import few_shots
 from tabulate import tabulate
 from dotenv import load_dotenv
