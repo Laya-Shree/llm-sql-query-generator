@@ -2,7 +2,9 @@ import pymysql
 from dotenv import load_dotenv
 import os
 from langchain_community.utilities import SQLDatabase
+import streamlit as st
 
+@st.cache_data
 def get_db_credentials():
     """Load and return database credentials from environment variables."""
     load_dotenv()
@@ -25,6 +27,7 @@ def get_pymysql_connection():
         port=credentials['port']
     )
 
+@st.cache_resource
 def get_langchain_db():
     """Create and return a LangChain SQLDatabase instance."""
     credentials = get_db_credentials()

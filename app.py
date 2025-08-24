@@ -8,6 +8,29 @@ import pandas as pd
 
 st.set_page_config(layout="wide")
 
+@st.cache_data(ttl=300)
+def fetch_tshirt_data():
+    connection = get_pymysql_connection()
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM t_shirts")
+            tshirt_results = cursor.fetchall()
+            tshirt_columns = [desc[0] for desc in cursor.description]
+            return pd.DataFrame(tshirt_results, columns=tshirt_columns)
+    finally:
+        connection.close()
+
+@st.cache_data(ttl=300)
+def fetch_discount_data():
+    connection = get_pymysql_connection()
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM discounts")
+            discount_results = cursor.fetchall()
+            discount_columns = [desc[0] for desc in cursor.description]
+            return pd.DataFrame(discount_results, columns=discount_columns)
+    finally:
+        connection.close()
 
 st.title("T Shirts: Database Q&A 👕")
 
@@ -23,35 +46,17 @@ try:
         tab1, tab2 = st.tabs(["T-Shirts Inventory", "Discounts"])
         
         with tab1:
-            with connection.cursor() as cursor:
-                # Execute query to get all t-shirts
-                cursor.execute("SELECT * FROM t_shirts")
-                tshirt_results = cursor.fetchall()
-                
-                # Get column names for t-shirts
-                tshirt_columns = [desc[0] for desc in cursor.description]
-                
-                # Convert results to DataFrame with proper columns
-                tshirt_df = pd.DataFrame(tshirt_results, columns=tshirt_columns)
-                
-                st.markdown("### Current T-Shirt Inventory")
-                st.dataframe(tshirt_df, hide_index=True, use_container_width=True)
-        
-        with tab2:
-            with connection.cursor() as cursor:
-                # Execute query to get all discounts
-                cursor.execute("SELECT * FROM discounts")
-                discount_results = cursor.fetchall()
-                
-                # Get column names for discounts
-                discount_columns = [desc[0] for desc in cursor.description]
-                
-                # Convert results to DataFrame with proper columns
-                discount_df = pd.DataFrame(discount_results, columns=discount_columns)
-                
-                st.markdown("### Current Discounts")
-                st.dataframe(discount_df, hide_index=True, use_container_width=True)
+            # Convert results to DataFrame with proper columns
+            tshirt_df = fetch_tshirt_data()
+            st.markdown("### Current T-Shirt Inventory")
+            st.dataframe(tshirt_df, hide_index=True, use_container_width=True)
     
+        with tab2:
+            # Convert results to DataFrame with proper columns
+            discount_df = fetch_discount_data()
+            st.markdown("### Current Discounts")
+            st.dataframe(discount_df, hide_index=True, use_container_width=True)
+
     with col2:
         st.markdown("### 💡 Example Questions")
         st.markdown(
