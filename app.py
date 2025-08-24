@@ -61,21 +61,15 @@ try:
         st.markdown("### 💡 Example Questions")
         st.markdown(
             """
-            **T-Shirt Questions:**
             - What is the total number of t-shirts in stock?
             - How many t-shirts do we have left for nike in extra small size and white color?
             - How much is the price of the inventory for all small size t-shirts?
             - How many t-shirts are priced above $20?
             - How many white color Levi's t shirts we have available?
             - If we have to sell all the Levi's T-shirts today. How much revenue our store will generate without discount?
-            
-            **Discount Questions:**
-            - What discounts are currently active?
             - Which t-shirt brands have discounts available?
             - What is the highest discount percentage available?
             - Are there any discounts for Adidas t-shirts?
-            
-            **Combined Questions:**
             - What would be the final price of Nike t-shirts after applying available discounts?
             - How much total revenue can we generate if we sell all inventory with current discounts?
             """
